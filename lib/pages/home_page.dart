@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kontakte/data/service/contacts_service.dart';
+import 'package:kontakte/screens/drawer.dart';
 
 import 'info_page.dart';
 
@@ -20,11 +21,12 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Kontakte"),
         centerTitle: true,
       ),
+      drawer: const NavDrawer(),
       body: FutureBuilder(
         future: ServiceContacts.getContacts(),
         builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator(),);
+          return  Center(child:  Image.asset("assets/loading.gif"));
         }else {
          return ListView.builder(
                           itemCount: ServiceContacts.userbox.length,
@@ -45,15 +47,15 @@ class _HomePageState extends State<HomePage> {
                                 child: ListTile(
                                   contentPadding: const EdgeInsets.all(8.0),
                                   leading: Container(
-                                    height: 49,
-                                    width: 49,
+                                    height: 60,
+                                    width: 60,
                                     decoration:  BoxDecoration(
                                         shape: BoxShape.circle,
                                           image: DecorationImage(
                                         image: NetworkImage(
                                             "https://source.unsplash.com/random/$index"),
                                         fit: BoxFit.cover),
-                                        color: Colors.amber,
+                                        color: Colors.transparent,
                                         boxShadow: const [
                                           BoxShadow(
                                               color:
@@ -85,9 +87,6 @@ class _HomePageState extends State<HomePage> {
                           },
                         );;
         }
-      },),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        ServiceContacts.getContacts();
       },),
     );
   }

@@ -15,7 +15,6 @@ class ServiceContacts {
     try {
       Response response = await Dio().get(UrlsProject.myAPI);
       if (response.statusCode==200) {
-
         var resdata=(response.data as List).map((e) => ModelContacts.fromJson(e)).toList();
         putToBox(resdata);
         return userbox;
