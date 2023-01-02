@@ -10,14 +10,14 @@ import '../model/model_contacts.dart';
 
 class ServiceContacts {
   static late Box<ModelContacts> userbox;
-  static Future<dynamic> getContacts() async {
+  Future<dynamic> getContacts() async {
     await openBox();
     try {
       Response response = await Dio().get(UrlsProject.myAPI);
       if (response.statusCode==200) {
         var resdata=(response.data as List).map((e) => ModelContacts.fromJson(e)).toList();
         putToBox(resdata);
-        return userbox;
+        return resdata;
       } else {
         response.statusMessage.toString();
       }
@@ -36,7 +36,7 @@ class ServiceContacts {
     userbox = await Hive.openBox<ModelContacts>("users");
   }
 
-  static putToBox(List<ModelContacts> data) async {
+  static Future putToBox(List<ModelContacts> data) async {
     await userbox.clear();
     for (ModelContacts element in data) {
       await userbox.add(element);

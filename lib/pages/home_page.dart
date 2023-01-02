@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: const NavDrawer(),
       body: FutureBuilder(
-        future: ServiceContacts.getContacts(),
+        future: ServiceContacts().getContacts(),
         builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return  Center(child:  Image.asset("assets/loading.gif"));
