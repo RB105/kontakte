@@ -8,9 +8,9 @@ import '../data/model/model_contacts.dart';
 
 class RepositoryContacts {
   static late Box<ModelContacts> userbox;
-  ServiceContacts service=ServiceContacts();
-  Future getRepositoryContacts()async{
-   return await service.getContacts().then((response)async{
+  ServiceContacts service = ServiceContacts();
+  Future getRepositoryContacts() async {
+    return await service.getContacts().then((response) async {
       if (response is List<ModelContacts>) {
         registerAdapters();
         await openBox();
@@ -20,7 +20,8 @@ class RepositoryContacts {
       }
     });
   }
-    static openBox() async {
+
+  static openBox() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
     userbox = await Hive.openBox<ModelContacts>("users");
@@ -32,7 +33,8 @@ class RepositoryContacts {
       await userbox.add(element);
     }
   }
-  static registerAdapters(){
+
+  static registerAdapters() {
     Hive.registerAdapter(ModelContactsAdapter());
     Hive.registerAdapter(AddressAdapter());
     Hive.registerAdapter(GeoAdapter());
