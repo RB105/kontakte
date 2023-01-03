@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:kontakte/data/service/contacts_service.dart';
-import 'package:kontakte/screens/drawer.dart';
-import 'package:kontakte/screens/search_delegate.dart';
+import 'package:kontakte/view/screens/drawer.dart';
+import 'package:kontakte/view/screens/search_delegate.dart';
 
 import 'info_page.dart';
 

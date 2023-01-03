@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../data/model/model_contacts.dart';
+import '../../data/model/model_contacts.dart';
 import '../pages/info_page.dart';
 
 class MySearchDelegate extends SearchDelegate {

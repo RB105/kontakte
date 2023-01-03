@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kontakte/data/service/contacts_service.dart';
-import 'package:kontakte/pages/home_page.dart';
+import 'package:kontakte/view/pages/home_page.dart';
 
 void main(List<String> args) {
   ServiceContacts.registerAdapters();
