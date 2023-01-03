@@ -23,7 +23,36 @@ class _InfoPageState extends State<InfoPage> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Image.asset("assets/Vector.jpg"))
+          IconButton(
+              onPressed: () {
+               /* AlertDialog(
+                  title: Text("Do you want to block ${widget.data.name}"),
+                  actions: [
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                 // padding: EdgeInsets.symmetric(horizontal: 50),
+                  shape: const StadiumBorder()),
+              child: const Text(
+                "No",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                 // padding: EdgeInsets.symmetric(horizontal: 50),
+                  shape: const StadiumBorder()),
+              child: const Text(
+                "Yes",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            )
+          ],
+
+                );
+ */             },
+              icon: Image.asset("assets/Vector.jpg"))
         ],
         iconTheme: const IconThemeData(color: Colors.black, size: 30),
       ),
@@ -54,74 +83,76 @@ class _InfoPageState extends State<InfoPage> {
 
   Column inSideText() {
     return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  Text(
-                    widget.data.name.toString(),
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.w700),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    widget.data.company!.name.toString(),
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xffA2A9B7),
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.call)),
-                      Text(
-                        widget.data.phone.toString(),
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(0xff36383D),
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.mail)),
-                      Text(
-                        widget.data.email.toString(),
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(0xff36383D),
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style:
-                            ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 50),
-                              shape: const StadiumBorder()),
-                        child: const Text("Call",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                      ),ElevatedButton(
-                        onPressed: () {},
-                        style:
-                            ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 50),
-                              shape: const StadiumBorder()),
-                        child: const Text("News",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                      )
-                    ],
-                  )
-                ],
-              );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 60,
+        ),
+        Text(
+          widget.data.name.toString(),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          widget.data.company!.name.toString(),
+          style: const TextStyle(
+              fontSize: 14,
+              color: Color(0xffA2A9B7),
+              fontWeight: FontWeight.w600),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
+            Text(
+              widget.data.phone.toString(),
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: Color(0xff36383D),
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.mail)),
+            Text(
+              widget.data.email.toString(),
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: Color(0xff36383D),
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  shape: const StadiumBorder()),
+              child: const Text(
+                "Call",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  shape: const StadiumBorder()),
+              child: const Text(
+                "News",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            )
+          ],
+        )
+      ],
+    );
   }
 
   Container myProfilPicture() {

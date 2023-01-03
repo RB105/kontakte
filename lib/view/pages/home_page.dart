@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:kontakte/data/service/contacts_service.dart';
 import 'package:kontakte/view/screens/drawer.dart';
 import 'package:kontakte/view/screens/search_delegate.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/provider_bottom_navigation.dart';
+import '../../provider/provider_theme_change.dart';
 import 'info_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,11 +19,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MultiProvider(providers: [
+       ChangeNotifierProvider(
+            create: (context) => BottomNavigationBarProvider()),
+        ChangeNotifierProvider(create: (context) => ChangeThemeProvider())
+    ],
+    builder: (context, child) {
+      return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: myAppBar(),
         drawer: const NavDrawer(), // drawer
-        body: futureBuilder());
+        body: futureBuilder(),
+        bottomNavigationBar:  BottomNavigationBar(
+            fixedColor: Colors.black,
+            currentIndex:
+                context.watch<BottomNavigationBarProvider>().currentIndex,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: ""),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.settings), label: ""),
+            ],
+            onTap: (v) {
+              context
+                  .read<BottomNavigationBarProvider>()
+                  .changeIndex(v.toInt());
+            },
+          ),
+        );
+    },
+    );
+        
   }
 
 // App bar edition 
