@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kontakte/core/constants/current_them_mode.dart';
 
 import 'package:kontakte/data/service/contacts_service.dart';
+import 'package:kontakte/view/pages/setting_page.dart';
 import 'package:kontakte/view/screens/drawer.dart';
 import 'package:kontakte/view/screens/search_delegate.dart';
 import 'package:provider/provider.dart';
@@ -17,58 +19,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-       ChangeNotifierProvider(
-            create: (context) => BottomNavigationBarProvider()),
-        ChangeNotifierProvider(create: (context) => ChangeThemeProvider())
-    ],
-    builder: (context, child) {
-      return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: myAppBar(),
-        drawer: const NavDrawer(), // drawer
-        body: futureBuilder(),
-        bottomNavigationBar:  BottomNavigationBar(
-            fixedColor: Colors.black,
-            currentIndex:
-                context.watch<BottomNavigationBarProvider>().currentIndex,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.person), label: ""),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: ""),
-            ],
-            onTap: (v) {
-              context
-                  .read<BottomNavigationBarProvider>()
-                  .changeIndex(v.toInt());
-            },
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ChangeThemeProvider()),
+      ],
+      builder: (context, child) {
+        return Scaffold(backgroundColor: CurrentThemMode.scaffoldColor,
+          resizeToAvoidBottomInset: false,
+          appBar: myAppBar(),
+          drawer: const NavDrawer(), // drawer
+          body: futureBuilder(),
         );
-    },
+      },
     );
-        
   }
 
-// App bar edition 
+// App bar edition
 // Search Delegate within this
   AppBar myAppBar() {
     return AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text("Kontakte",style: TextStyle(color: Colors.black),),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                showSearch(context: context, delegate: MySearchDelegate(ServiceContacts.userbox));
-              }, icon: const Icon(Icons.search_outlined))
-        ],
-        iconTheme: const IconThemeData(color: Colors.black,size: 30),
-      );
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title:  const Text(
+        "Kontakte",
+        style: TextStyle(color: Colors.black),
+      ),
+      centerTitle: true,
+      actions: [
+        IconButton(
+            onPressed: () {
+              showSearch(
+                  context: context,
+                  delegate: MySearchDelegate(ServiceContacts.userbox));
+            },
+            icon: const Icon(Icons.search_outlined))
+      ],
+      iconTheme: const IconThemeData(color: Colors.black, size: 30),
+    );
   }
 
 // HOME PAGE body

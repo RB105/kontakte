@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kontakte/data/service/contacts_service.dart';
-import 'package:kontakte/view/pages/home_page.dart';
-import 'package:kontakte/view/pages/setting_page.dart';
+import 'package:kontakte/view/screens/current_screen.dart';
 
 void main(List<String> args) {
   ServiceContacts.registerAdapters();
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SettingsPage(),
+      home: CurrentScreen(),
     );
   }
 }

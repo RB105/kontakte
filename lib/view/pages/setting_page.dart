@@ -14,11 +14,18 @@ class SettingsPage extends StatelessWidget {
         create: (context) => ChangeThemeProvider(),
         builder: (context, child) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+              title: const Text("Settings", style: TextStyle(color: Colors.black)),
+            ),
             backgroundColor: CurrentThemMode.scaffoldColor,
             body: SafeArea(
               child: Column(
                 children: [
                   Card(
+                    color: Colors.grey,
                     child: ListTile(
                       leading: const Text(
                         "Dark theme",
