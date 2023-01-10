@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../data/model/model_contacts.dart';
-import '../pages/info_page.dart';
+import '../pages/single_pages/info_page.dart';
 
 class MySearchDelegate extends SearchDelegate {
   final Box<ModelContacts> box;
@@ -64,33 +64,43 @@ class MySearchDelegate extends SearchDelegate {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: ListTile(
-              contentPadding: const EdgeInsets.all(8.0),
-              leading: Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            "https://source.unsplash.com/random/$index"),
-                        fit: BoxFit.cover),
-                    color: Colors.transparent,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                          offset: Offset(0, 2),
-                          blurRadius: 9)
-                    ]),
-              ),
-              subtitle: Text(suggestions[index].phone.toString(),
-                  style: const TextStyle(fontWeight: FontWeight.w600)),
-              title: Text(
-                suggestions[index].name.toString(),
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              trailing:
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
-            ),
+                contentPadding: const EdgeInsets.all(8.0),
+                leading: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "https://source.unsplash.com/random/$index"),
+                          fit: BoxFit.cover),
+                      color: Colors.transparent,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            offset: Offset(0, 2),
+                            blurRadius: 9)
+                      ]),
+                ),
+                subtitle: Text(suggestions[index].phone.toString(),
+                    style: const TextStyle(fontWeight: FontWeight.w600)),
+                title: Text(
+                  suggestions[index].name.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                trailing: SizedBox(
+                  height: 25,
+                  width: 100,
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.call)),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.messenger_sharp)),
+                    ],
+                  ),
+                )),
           ),
         );
       },

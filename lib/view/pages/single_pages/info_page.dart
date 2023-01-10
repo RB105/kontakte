@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kontakte/provider/prvovider_info_page.dart';
+import 'package:provider/provider.dart';
 
-import '../../data/model/model_contacts.dart';
+import '../../../data/model/model_contacts.dart';
 
 class InfoPage extends StatefulWidget {
   final ModelContacts data;
@@ -13,50 +15,58 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(
-          "Kontakte",
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-               /* AlertDialog(
-                  title: Text("Do you want to block ${widget.data.name}"),
-                  actions: [
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                 // padding: EdgeInsets.symmetric(horizontal: 50),
-                  shape: const StadiumBorder()),
-              child: const Text(
-                "No",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                 // padding: EdgeInsets.symmetric(horizontal: 50),
-                  shape: const StadiumBorder()),
-              child: const Text(
-                "Yes",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-            )
-          ],
+    return MultiProvider(providers: [ChangeNotifierProvider(
+      create: (context) => ProviderInfoPage(),
+      builder: (context, child) => _scaffold(),
+    )]);
+  }
 
-                );
- */             },
-              icon: Image.asset("assets/Vector.jpg"))
-        ],
-        iconTheme: const IconThemeData(color: Colors.black, size: 30),
+  Scaffold _scaffold() {
+    return Scaffold(
+      appBar: _appBar(),
+      body: _centeralContainer(),
+    );
+  }
+
+  AppBar _appBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Text(
+        "Kontakte",
+        style: TextStyle(color: Colors.black),
       ),
-      body: Center(
+      centerTitle: true,
+      actions: [
+        PopupMenuButton<String>(
+          // onSelected: (value) {
+          //   if (value == "Block") {
+          //     context.read<ProviderInfoPage>().changeState();
+          //   } else  {
+          //      context.read<ProviderInfoPage>().changeState();
+          //   }
+          // },
+          itemBuilder: (BuildContext context) {
+            return [
+              const PopupMenuItem(
+                value: "Block",
+                child: Text(
+                  "Block",
+                  style: TextStyle(color: Colors.red),
+                ),
+              )
+            ];
+          },
+        )
+      ],
+      iconTheme: const IconThemeData(color: Colors.black, size: 30),
+    );
+  }
+
+  Widget _centeralContainer() {
+    return Opacity(
+      opacity: Provider.of<ProviderInfoPage>(context).pageOpacity,
+      child: Center(
         child: Stack(
             alignment: Alignment.topCenter,
             clipBehavior: Clip.none,
@@ -132,7 +142,7 @@ class _InfoPageState extends State<InfoPage> {
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
                   shape: const StadiumBorder()),
               child: const Text(
                 "Call",
@@ -142,7 +152,7 @@ class _InfoPageState extends State<InfoPage> {
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
                   shape: const StadiumBorder()),
               child: const Text(
                 "News",
@@ -160,6 +170,9 @@ class _InfoPageState extends State<InfoPage> {
       height: 183,
       width: 183,
       decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage('https://source.unsplash.com/random'),
+              fit: BoxFit.cover),
           color: Colors.black,
           shape: BoxShape.circle,
           boxShadow: [

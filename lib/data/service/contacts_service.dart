@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:kontakte/core/constants/project_urls.dart';
-import 'package:kontakte/core/network/dio_config.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../model/model_contacts.dart';
