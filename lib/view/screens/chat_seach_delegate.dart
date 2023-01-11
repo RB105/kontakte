@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:kontakte/view/pages/single_pages/chat_info.dart';
 
 import '../../data/model/model_contacts.dart';
-import '../../data/service/contacts_service.dart';
-import '../pages/single_pages/chat_info.dart';
-import '../pages/single_pages/info_page.dart';
 
-class MySearchDelegate extends SearchDelegate {
+class ChatSearchDelegate extends SearchDelegate {
   final Box<ModelContacts> box;
 
-  MySearchDelegate(this.box);
+  ChatSearchDelegate(this.box);
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -51,6 +49,7 @@ class MySearchDelegate extends SearchDelegate {
     return listViewForSearch(suggestions);
   }
 
+// this is for UI
   ListView listViewForSearch(List<ModelContacts> suggestions) {
     return ListView.builder(
       itemCount: suggestions.length,
@@ -60,7 +59,7 @@ class MySearchDelegate extends SearchDelegate {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => InfoPage(data: suggestions[index]),
+                  builder: (context) => ChatInfo(data: suggestions[index]),
                 ));
           },
           child: Padding(
@@ -90,27 +89,8 @@ class MySearchDelegate extends SearchDelegate {
                   suggestions[index].name.toString(),
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-                trailing: SizedBox(
-                  height: 25,
-                  width: 100,
-                  child: Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.call)),
-                      IconButton(
-                          onPressed: () {
-                             Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ChatInfo(
-                                            data: ServiceContacts.userbox!
-                                                .getAt(index)!),
-                                      ));
-                          },
-                          icon: const Icon(Icons.messenger_sharp)),
-                    ],
-                  ),
-                )),
+                trailing: IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.call))),
           ),
         );
       },

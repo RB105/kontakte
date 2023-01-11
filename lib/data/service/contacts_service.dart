@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import '../model/model_contacts.dart';
 
 class ServiceContacts {
-  static late Box<ModelContacts> userbox;
+  static  Box<ModelContacts>? userbox;
   Future<dynamic> getContacts() async {
     await openBox();
     try {
@@ -36,9 +36,9 @@ class ServiceContacts {
   }
 
   static Future putToBox(List<ModelContacts> data) async {
-    await userbox.clear();
+    await userbox!.clear();
     for (ModelContacts element in data) {
-      await userbox.add(element);
+      await userbox!.add(element);
     }
   }
   static registerAdapters(){

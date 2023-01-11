@@ -5,6 +5,7 @@ import 'package:kontakte/view/screens/current_screen.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
+  
   ServiceContacts.registerAdapters();
   runApp(MultiProvider(
     providers: [

@@ -15,10 +15,12 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [ChangeNotifierProvider(
-      create: (context) => ProviderInfoPage(),
-      builder: (context, child) => _scaffold(),
-    )]);
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (context) => ProviderInfoPage(),
+        builder: (context, child) => _scaffold(),
+      )
+    ]);
   }
 
   Scaffold _scaffold() {
@@ -39,13 +41,17 @@ class _InfoPageState extends State<InfoPage> {
       centerTitle: true,
       actions: [
         PopupMenuButton<String>(
-          // onSelected: (value) {
-          //   if (value == "Block") {
-          //     context.read<ProviderInfoPage>().changeState();
-          //   } else  {
-          //      context.read<ProviderInfoPage>().changeState();
-          //   }
-          // },
+          onSelected: (value) {
+            final snackbar = SnackBar(
+              content: Text("${widget.data.name.toString()} has been blocked"),
+              backgroundColor: Colors.black45,
+              action: SnackBarAction(
+                label: 'dismiss',textColor: Colors.black,
+                onPressed: () {},
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          },
           itemBuilder: (BuildContext context) {
             return [
               const PopupMenuItem(

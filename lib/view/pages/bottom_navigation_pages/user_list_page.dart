@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kontakte/core/constants/current_them_mode.dart';
 
 import 'package:kontakte/data/service/contacts_service.dart';
+import 'package:kontakte/view/pages/single_pages/chat_info.dart';
 import 'package:kontakte/view/screens/drawer.dart';
 import 'package:kontakte/view/screens/search_delegate.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,7 @@ class _HomePageState extends State<UserListPage> {
             onPressed: () {
               showSearch(
                   context: context,
-                  delegate: MySearchDelegate(ServiceContacts.userbox));
+                  delegate: MySearchDelegate(ServiceContacts.userbox!));
             },
             icon: const Icon(Icons.search_outlined))
       ],
@@ -62,12 +63,13 @@ class _HomePageState extends State<UserListPage> {
 
 // HOME PAGE body
   Widget bodyBuilder() {
-    return Builder(builder: (context) {
-        if (ServiceContacts.userbox.isEmpty) {
+    return Builder(
+      builder: (context) {
+        if (ServiceContacts.userbox!.isEmpty) {
           return Center(child: Image.asset("assets/loading.gif"));
         } else {
           return ListView.builder(
-            itemCount: ServiceContacts.userbox.length,
+            itemCount: ServiceContacts.userbox!.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
@@ -75,7 +77,7 @@ class _HomePageState extends State<UserListPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => InfoPage(
-                            data: ServiceContacts.userbox.getAt(index)!),
+                            data: ServiceContacts.userbox!.getAt(index)!),
                       ));
                 },
                 child: Padding(
@@ -100,13 +102,13 @@ class _HomePageState extends State<UserListPage> {
                             ]),
                       ),
                       subtitle: Text(
-                          ServiceContacts.userbox
+                          ServiceContacts.userbox!
                               .getAt(index)!
                               .phone
                               .toString(),
                           style: const TextStyle(fontWeight: FontWeight.w600)),
                       title: Text(
-                        ServiceContacts.userbox.getAt(index)!.name.toString(),
+                        ServiceContacts.userbox!.getAt(index)!.name.toString(),
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       trailing: SizedBox(
@@ -117,7 +119,15 @@ class _HomePageState extends State<UserListPage> {
                             IconButton(
                                 onPressed: () {}, icon: const Icon(Icons.call)),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChatInfo(
+                                            data: ServiceContacts.userbox!
+                                                .getAt(index)!),
+                                      ));
+                                },
                                 icon: const Icon(Icons.messenger_sharp)),
                           ],
                         ),
@@ -127,6 +137,7 @@ class _HomePageState extends State<UserListPage> {
             },
           );
         }
-      },);
+      },
+    );
   }
 }
